@@ -830,22 +830,22 @@ package feathers.controls.text
 			}
 			else
 			{
-				if(this._needsNewBitmap)
-				{
+//				if(this._needsNewBitmap)
+//				{
 					this._textSnapshot.texture.dispose();
 					this._textSnapshot.texture = starling.textures.Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor);
 					this._textSnapshot.readjustSize();
-				}
-				else
-				{
-					//this is faster if we haven't resized the bitmapdata
-					const texture:starling.textures.Texture = this._textSnapshot.texture;
-					if(Starling.handleLostContext && texture is ConcreteTexture)
-					{
-						ConcreteTexture(texture).restoreOnLostContext(this._textSnapshotBitmapData);
-					}
-					flash.display3D.textures.Texture(texture.base).uploadFromBitmapData(this._textSnapshotBitmapData);
-				}
+//				}
+//				else
+//				{
+//					//this is faster if we haven't resized the bitmapdata
+//					const texture:starling.textures.Texture = this._textSnapshot.texture;
+//					if(Starling.handleLostContext && texture is ConcreteTexture)
+//					{
+//						ConcreteTexture(texture).restoreOnLostContext(this._textSnapshotBitmapData);
+//					}
+//					flash.display3D.textures.Texture(texture.base).uploadFromBitmapData(this._textSnapshotBitmapData);
+//				}
 			}
 			this._needsNewBitmap = false;
 		}

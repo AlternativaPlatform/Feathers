@@ -7,6 +7,7 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+
 	import feathers.core.FeathersControl;
 	import feathers.events.FeathersEventType;
 
@@ -20,7 +21,6 @@ package feathers.controls
 	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
 	import flash.net.URLRequest;
-	import flash.system.ImageDecodingPolicy;
 	import flash.system.LoaderContext;
 
 	import starling.core.RenderSupport;
@@ -71,7 +71,7 @@ package feathers.controls
 		 * @private
 		 */
 		private static const LOADER_CONTEXT:LoaderContext = new LoaderContext(true);
-		LOADER_CONTEXT.imageDecodingPolicy = ImageDecodingPolicy.ON_LOAD;
+//		LOADER_CONTEXT.imageDecodingPolicy = ImageDecodingPolicy.ON_LOAD;
 
 		/**
 		 * Constructor.

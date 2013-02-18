@@ -7,6 +7,7 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+
 	import feathers.core.FeathersControl;
 	import feathers.core.IFocusDisplayObject;
 	import feathers.core.ITextEditor;
@@ -17,7 +18,6 @@ package feathers.controls
 	import flash.ui.Mouse;
 	import flash.ui.MouseCursor;
 
-	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.Event;
 	import starling.events.Touch;
@@ -591,7 +591,7 @@ package feathers.controls
 			if(textEditorInvalid || stateInvalid)
 			{
 				this.textEditor.isEnabled = this._isEnabled;
-				if(!this._isEnabled && Mouse.supportsNativeCursor && this._oldMouseCursor)
+				if(!this._isEnabled && this._oldMouseCursor)
 				{
 					Mouse.cursor = this._oldMouseCursor;
 					this._oldMouseCursor = null;
@@ -792,7 +792,7 @@ package feathers.controls
 			if(touches.length == 0)
 			{
 				//end hover
-				if(Mouse.supportsNativeCursor && this._oldMouseCursor)
+				if (this._oldMouseCursor)
 				{
 					Mouse.cursor = this._oldMouseCursor;
 					this._oldMouseCursor = null;
@@ -840,7 +840,7 @@ package feathers.controls
 					}
 					else if(touch.phase == TouchPhase.HOVER)
 					{
-						if(Mouse.supportsNativeCursor && !this._oldMouseCursor)
+						if (!this._oldMouseCursor)
 						{
 							this._oldMouseCursor = Mouse.cursor;
 							Mouse.cursor = MouseCursor.IBEAM;

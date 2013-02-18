@@ -270,7 +270,7 @@ package feathers.text
 			this._textField.text = value;
 		}
 
-		private var _textAlign:String = TextFormatAlign.START;
+		private var _textAlign:String = TextFormatAlign.LEFT;
 
 		public function get textAlign():String
 		{
@@ -284,11 +284,11 @@ package feathers.text
 				return;
 			}
 			this._textAlign = value;
-			if(value == TextFormatAlign.START)
+			if(value == TextFormatAlign.LEFT)
 			{
 				value = TextFormatAlign.LEFT;
 			}
-			else if(value == TextFormatAlign.END)
+			else if(value == TextFormatAlign.RIGHT)
 			{
 				value = TextFormatAlign.RIGHT;
 			}

@@ -230,7 +230,7 @@ package feathers.controls
 			const callout:Callout = new Callout();
 			callout.closeOnTouchBeganOutside = true;
 			callout.closeOnTouchEndedOutside = true;
-			callout.closeOnKeys = new <uint>[Keyboard.BACK, Keyboard.ESCAPE];
+			callout.closeOnKeys = new <uint>[Keyboard.ESCAPE];
 			return callout;
 		}
 

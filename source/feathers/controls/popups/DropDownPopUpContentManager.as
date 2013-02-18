@@ -188,7 +188,7 @@ package feathers.controls.popups
 		 */
 		protected function stage_keyDownHandler(event:KeyboardEvent):void
 		{
-			if(event.keyCode != Keyboard.BACK && event.keyCode != Keyboard.ESCAPE)
+			if(event.keyCode != Keyboard.ESCAPE)
 			{
 				return;
 			}

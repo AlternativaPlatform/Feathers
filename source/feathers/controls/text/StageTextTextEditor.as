@@ -7,13 +7,13 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls.text
 {
+
 	import feathers.core.FeathersControl;
 	import feathers.core.ITextEditor;
 	import feathers.events.FeathersEventType;
 	import feathers.text.StageTextField;
 
 	import flash.display.BitmapData;
-	import flash.display3D.textures.Texture;
 	import flash.events.Event;
 	import flash.events.FocusEvent;
 	import flash.events.KeyboardEvent;
@@ -33,7 +33,6 @@ package feathers.controls.text
 	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.events.Event;
-	import starling.textures.ConcreteTexture;
 	import starling.textures.Texture;
 	import starling.utils.MatrixUtil;
 
@@ -577,7 +576,7 @@ package feathers.controls.text
 		/**
 		 * @private
 		 */
-		protected var _textAlign:String = TextFormatAlign.START;
+		protected var _textAlign:String = TextFormatAlign.LEFT;
 
 		/**
 		 * Same as the <code>StageText</code> property with the same name.
@@ -821,11 +820,11 @@ package feathers.controls.text
 			format.size = this._fontSize;
 			format.bold = this._fontWeight == FontWeight.BOLD;
 			var alignValue:String = this._textAlign;
-			if(alignValue == TextFormatAlign.START)
+			if(alignValue == TextFormatAlign.LEFT)
 			{
 				alignValue = TextFormatAlign.LEFT;
 			}
-			else if(alignValue == TextFormatAlign.END)
+			else if(alignValue == TextFormatAlign.RIGHT)
 			{
 				alignValue = TextFormatAlign.RIGHT;
 			}
@@ -884,28 +883,28 @@ package feathers.controls.text
 			this.stageText.drawViewPortToBitmapData(this.textSnapshotBitmapData);
 			if(!this.textSnapshot)
 			{
-				this.textSnapshot = new Image(starling.textures.Texture.fromBitmapData(this.textSnapshotBitmapData, false, false, Starling.contentScaleFactor));
+				this.textSnapshot = new Image(Texture.fromBitmapData(this.textSnapshotBitmapData, false, false, Starling.contentScaleFactor));
 				this.addChild(this.textSnapshot);
 			}
 			else
 			{
-				if(needsNewBitmap)
-				{
+//				if(needsNewBitmap)
+//				{
 					this.textSnapshot.texture.dispose();
-					this.textSnapshot.texture = starling.textures.Texture.fromBitmapData(this.textSnapshotBitmapData, false, false, Starling.contentScaleFactor);
+					this.textSnapshot.texture = Texture.fromBitmapData(this.textSnapshotBitmapData, false, false, Starling.contentScaleFactor);
 					this.textSnapshot.readjustSize();
-				}
-				else
-				{
-					//this is faster, so use it if we haven't resized the
-					//bitmapdata
-					const texture:starling.textures.Texture = this.textSnapshot.texture;
-					if(Starling.handleLostContext && texture is ConcreteTexture)
-					{
-						ConcreteTexture(texture).restoreOnLostContext(this.textSnapshotBitmapData);
-					}
-					flash.display3D.textures.Texture(texture.base).uploadFromBitmapData(this.textSnapshotBitmapData);
-				}
+//				}
+//				else
+//				{
+//					//this is faster, so use it if we haven't resized the
+//					//bitmapdata
+//					const texture:starling.textures.Texture = this.textSnapshot.texture;
+//					if(Starling.handleLostContext && texture is ConcreteTexture)
+//					{
+//						ConcreteTexture(texture).restoreOnLostContext(this.textSnapshotBitmapData);
+//					}
+//					flash.display3D.textures.Texture(texture.base).uploadFromBitmapData(this.textSnapshotBitmapData);
+//				}
 			}
 
 			this.getTransformationMatrix(this.stage, HELPER_MATRIX);
@@ -1079,14 +1078,14 @@ package feathers.controls.text
 			{
 				this.dispatchEventWith(FeathersEventType.ENTER);
 			}
-			else if(event.keyCode == Keyboard.BACK)
-			{
-				//even a listener on the stage won't detect the back key press that
-				//will close the application if the StageText has focus, so we
-				//always need to prevent it here
-				event.preventDefault();
-				Starling.current.nativeStage.focus = Starling.current.nativeStage;
-			}
+//			else if(event.keyCode == Keyboard.BACK)
+//			{
+//				//even a listener on the stage won't detect the back key press that
+//				//will close the application if the StageText has focus, so we
+//				//always need to prevent it here
+//				event.preventDefault();
+//				Starling.current.nativeStage.focus = Starling.current.nativeStage;
+//			}
 		}
 	}
 }

@@ -287,7 +287,7 @@ package feathers.dragDrop
 		 */
 		protected static function nativeStage_keyDownHandler(event:KeyboardEvent):void
 		{
-			if(event.keyCode == Keyboard.ESCAPE || event.keyCode == Keyboard.BACK)
+			if(event.keyCode == Keyboard.ESCAPE)
 			{
 				event.preventDefault();
 				cancelDrag();
