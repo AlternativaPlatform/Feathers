@@ -7,8 +7,10 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.dragDrop
 {
+
 	import feathers.core.PopUpManager;
 	import feathers.events.DragDropEvent;
+	import feathers.utils.Substitute;
 
 	import flash.errors.IllegalOperationError;
 	import flash.events.KeyboardEvent;
@@ -287,7 +289,7 @@ package feathers.dragDrop
 		 */
 		protected static function nativeStage_keyDownHandler(event:KeyboardEvent):void
 		{
-			if(event.keyCode == Keyboard.ESCAPE)
+			if(event.keyCode == Substitute.KEYBOARD_BACK || event.keyCode == Keyboard.BACK)
 			{
 				event.preventDefault();
 				cancelDrag();

@@ -13,6 +13,7 @@ package feathers.controls
 	import feathers.core.ITextEditor;
 	import feathers.core.PropertyProxy;
 	import feathers.events.FeathersEventType;
+	import feathers.utils.Substitute;
 
 	import flash.geom.Point;
 	import flash.ui.Mouse;
@@ -591,7 +592,7 @@ package feathers.controls
 			if(textEditorInvalid || stateInvalid)
 			{
 				this.textEditor.isEnabled = this._isEnabled;
-				if(!this._isEnabled && this._oldMouseCursor)
+				if(!this._isEnabled && Substitute.supportsNativeCursor && this._oldMouseCursor)
 				{
 					Mouse.cursor = this._oldMouseCursor;
 					this._oldMouseCursor = null;

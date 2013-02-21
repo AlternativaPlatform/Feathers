@@ -10,6 +10,7 @@ package feathers.controls
 
 	import feathers.core.FeathersControl;
 	import feathers.events.FeathersEventType;
+	import feathers.utils.Substitute;
 
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -71,7 +72,7 @@ package feathers.controls
 		 * @private
 		 */
 		private static const LOADER_CONTEXT:LoaderContext = new LoaderContext(true);
-//		LOADER_CONTEXT.imageDecodingPolicy = ImageDecodingPolicy.ON_LOAD;
+		Substitute.setImageDecodingPolicyOnLoad();
 
 		/**
 		 * Constructor.

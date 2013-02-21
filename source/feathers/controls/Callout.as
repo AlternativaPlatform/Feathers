@@ -7,8 +7,10 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+
 	import feathers.core.FeathersControl;
 	import feathers.core.PopUpManager;
+	import feathers.utils.Substitute;
 
 	import flash.events.KeyboardEvent;
 	import flash.geom.Rectangle;
@@ -230,7 +232,7 @@ package feathers.controls
 			const callout:Callout = new Callout();
 			callout.closeOnTouchBeganOutside = true;
 			callout.closeOnTouchEndedOutside = true;
-			callout.closeOnKeys = new <uint>[Keyboard.ESCAPE];
+			callout.closeOnKeys = new <uint>[Substitute.KEYBOARD_BACK, Keyboard.ESCAPE];
 			return callout;
 		}
 

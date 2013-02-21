@@ -7,9 +7,11 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls.popups
 {
+
 	import feathers.core.IFeathersControl;
 	import feathers.core.PopUpManager;
 	import feathers.events.FeathersEventType;
+	import feathers.utils.Substitute;
 
 	import flash.errors.IllegalOperationError;
 	import flash.events.KeyboardEvent;
@@ -188,7 +190,7 @@ package feathers.controls.popups
 		 */
 		protected function stage_keyDownHandler(event:KeyboardEvent):void
 		{
-			if(event.keyCode != Keyboard.ESCAPE)
+			if(event.keyCode != Substitute.KEYBOARD_BACK && event.keyCode != Keyboard.ESCAPE)
 			{
 				return;
 			}
