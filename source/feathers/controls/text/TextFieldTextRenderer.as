@@ -7,11 +7,12 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls.text
 {
+
 	import feathers.core.FeathersControl;
 	import feathers.core.ITextRenderer;
+	import feathers.utils.Substitute;
 
 	import flash.display.BitmapData;
-	import flash.display3D.textures.Texture;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.text.AntiAliasType;
@@ -825,27 +826,27 @@ package feathers.controls.text
 			this._textSnapshotBitmapData.draw(this._textField, HELPER_MATRIX);
 			if(!this._textSnapshot)
 			{
-				this._textSnapshot = new Image(starling.textures.Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor));
+				this._textSnapshot = new Image(Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor));
 				this.addChild(this._textSnapshot);
 			}
 			else
 			{
-//				if(this._needsNewBitmap)
-//				{
+				if(this._needsNewBitmap)
+				{
 					this._textSnapshot.texture.dispose();
-					this._textSnapshot.texture = starling.textures.Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor);
+					this._textSnapshot.texture = Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor);
 					this._textSnapshot.readjustSize();
-//				}
-//				else
-//				{
-//					//this is faster if we haven't resized the bitmapdata
-//					const texture:starling.textures.Texture = this._textSnapshot.texture;
-//					if(Starling.handleLostContext && texture is ConcreteTexture)
-//					{
-//						ConcreteTexture(texture).restoreOnLostContext(this._textSnapshotBitmapData);
-//					}
-//					flash.display3D.textures.Texture(texture.base).uploadFromBitmapData(this._textSnapshotBitmapData);
-//				}
+				}
+				else
+				{
+					//this is faster if we haven't resized the bitmapdata
+					const texture:Texture = this._textSnapshot.texture;
+					if(Starling.handleLostContext && texture is ConcreteTexture)
+					{
+						ConcreteTexture(texture).restoreOnLostContext(this._textSnapshotBitmapData);
+					}
+					Substitute.updateTextureBitmapData(texture, this._textSnapshotBitmapData);
+				}
 			}
 			this._needsNewBitmap = false;
 		}

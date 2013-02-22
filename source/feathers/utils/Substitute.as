@@ -1,7 +1,11 @@
 package feathers.utils {
 
+	import flash.display.BitmapData;
+	import flash.display3D.textures.Texture;
 	import flash.system.LoaderContext;
 	import flash.ui.Mouse;
+
+	import starling.textures.Texture;
 
 	public class Substitute {
 
@@ -27,6 +31,15 @@ package feathers.utils {
 				return Mouse["supportsNativeCursor"];
 			}
 			return true;
+		}
+
+		public static function updateTextureBitmapData(texture:starling.textures.Texture, data:BitmapData):void {
+			var actual:flash.display3D.textures.Texture = texture.base as flash.display3D.textures.Texture;
+			if (actual != null && "uploadFromBitmapData" in actual) {
+				actual["uploadFromBitmapData"](data);
+			} else if ("updateBitmapData" in texture) {
+				texture["updateBitmapData"](data);
+			}
 		}
 
 	}

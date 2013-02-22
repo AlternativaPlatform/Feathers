@@ -12,6 +12,7 @@ package feathers.controls.text
 	import feathers.core.ITextEditor;
 	import feathers.events.FeathersEventType;
 	import feathers.text.StageTextField;
+	import feathers.utils.Substitute;
 
 	import flash.display.BitmapData;
 	import flash.events.Event;
@@ -33,6 +34,7 @@ package feathers.controls.text
 	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.events.Event;
+	import starling.textures.ConcreteTexture;
 	import starling.textures.Texture;
 	import starling.utils.MatrixUtil;
 
@@ -888,23 +890,23 @@ package feathers.controls.text
 			}
 			else
 			{
-//				if(needsNewBitmap)
-//				{
+				if(needsNewBitmap)
+				{
 					this.textSnapshot.texture.dispose();
 					this.textSnapshot.texture = Texture.fromBitmapData(this.textSnapshotBitmapData, false, false, Starling.contentScaleFactor);
 					this.textSnapshot.readjustSize();
-//				}
-//				else
-//				{
-//					//this is faster, so use it if we haven't resized the
-//					//bitmapdata
-//					const texture:starling.textures.Texture = this.textSnapshot.texture;
-//					if(Starling.handleLostContext && texture is ConcreteTexture)
-//					{
-//						ConcreteTexture(texture).restoreOnLostContext(this.textSnapshotBitmapData);
-//					}
-//					flash.display3D.textures.Texture(texture.base).uploadFromBitmapData(this.textSnapshotBitmapData);
-//				}
+				}
+				else
+				{
+					//this is faster, so use it if we haven't resized the
+					//bitmapdata
+					const texture:Texture = this.textSnapshot.texture;
+					if(Starling.handleLostContext && texture is ConcreteTexture)
+					{
+						ConcreteTexture(texture).restoreOnLostContext(this.textSnapshotBitmapData);
+					}
+					Substitute.updateTextureBitmapData(texture, this.textSnapshotBitmapData);
+				}
 			}
 
 			this.getTransformationMatrix(this.stage, HELPER_MATRIX);

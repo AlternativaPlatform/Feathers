@@ -7,12 +7,13 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls.text
 {
+
 	import feathers.core.FeathersControl;
 	import feathers.core.ITextEditor;
 	import feathers.events.FeathersEventType;
+	import feathers.utils.Substitute;
 
 	import flash.display.BitmapData;
-	import flash.display3D.textures.Texture;
 	import flash.events.FocusEvent;
 	import flash.events.KeyboardEvent;
 	import flash.geom.Matrix;
@@ -528,7 +529,7 @@ package feathers.controls.text
 			this.textField.addEventListener(flash.events.Event.CHANGE, textField_changeHandler);
 			this.textField.addEventListener(FocusEvent.FOCUS_IN, textField_focusInHandler);
 			this.textField.addEventListener(FocusEvent.FOCUS_OUT, textField_focusOutHandler);
-			this.textField.addEventListener(flash.events.KeyboardEvent.KEY_DOWN, textField_keyDownHandler);
+			this.textField.addEventListener(KeyboardEvent.KEY_DOWN, textField_keyDownHandler);
 		}
 
 		/**
@@ -697,27 +698,27 @@ package feathers.controls.text
 			this._textSnapshotBitmapData.draw(this.textField, HELPER_MATRIX);
 			if(!this.textSnapshot)
 			{
-				this.textSnapshot = new Image(starling.textures.Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor));
+				this.textSnapshot = new Image(Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor));
 				this.addChild(this.textSnapshot);
 			}
 			else
 			{
-//				if(this._needsNewBitmap)
-//				{
+				if(this._needsNewBitmap)
+				{
 					this.textSnapshot.texture.dispose();
-					this.textSnapshot.texture = starling.textures.Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor);
+					this.textSnapshot.texture = Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor);
 					this.textSnapshot.readjustSize();
-//				}
-//				else
-//				{
-//					//this is faster if we haven't resized the bitmapdata
-//					const texture:starling.textures.Texture = this.textSnapshot.texture;
-//					if(Starling.handleLostContext && texture is ConcreteTexture)
-//					{
-//						ConcreteTexture(texture).restoreOnLostContext(this._textSnapshotBitmapData);
-//					}
-//					flash.display3D.textures.Texture(texture.base).uploadFromBitmapData(this._textSnapshotBitmapData);
-//				}
+				}
+				else
+				{
+					//this is faster if we haven't resized the bitmapdata
+					const texture:Texture = this.textSnapshot.texture;
+					if(Starling.handleLostContext && texture is ConcreteTexture)
+					{
+						ConcreteTexture(texture).restoreOnLostContext(this._textSnapshotBitmapData);
+					}
+					Substitute.updateTextureBitmapData(texture, this._textSnapshotBitmapData);
+				}
 			}
 			this._needsNewBitmap = false;
 		}
@@ -796,7 +797,7 @@ package feathers.controls.text
 		/**
 		 * @private
 		 */
-		protected function textField_keyDownHandler(event:flash.events.KeyboardEvent):void
+		protected function textField_keyDownHandler(event:KeyboardEvent):void
 		{
 			if(event.keyCode == Keyboard.TAB)
 			{
